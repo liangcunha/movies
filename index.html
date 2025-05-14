@@ -1,115 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filmes by Liang</title>
   <style>
     body {
-      margin: 0;
+      background-color: #0f0f0f;
+      color: #00ffe1;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #ffffff;
-    }
-    header {
-      text-align: center;
-      padding: 50px 20px 20px;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-    header h1 {
-      font-size: 3em;
       margin: 0;
-      color: #00e0ff;
-      text-shadow: 0 0 10px #00e0ff;
+      padding: 20px;
     }
-    header p {
-      font-size: 1.2em;
-      color: #ccc;
-    }
-    main {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
+    h1 {
+      color: #00ffc3;
+      border-bottom: 2px solid #00ffc3;
+      padding-bottom: 10px;
     }
     .filme {
-      background-color: rgba(255, 255, 255, 0.05);
-      border-left: 5px solid #00e0ff;
-      padding: 20px;
-      margin-bottom: 20px;
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #1f1f1f;
+      border-left: 5px solid #00ffe1;
       border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    .filme:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-    .filme h2 {
-      margin-top: 0;
-      color: #00e0ff;
-    }
-    .filme p {
-      margin: 5px 0;
     }
     .filme a {
-      color: #00e0ff;
+      color: #ff4081;
       text-decoration: none;
     }
     .filme a:hover {
       text-decoration: underline;
     }
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-      color: #aaa;
-      border-top: 1px solid #333;
+    .nota {
+      font-weight: bold;
+      color: #ffe100;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🎬 Filmes by Liang</h1>
-    <p>Última atualização: 14/05/2025</p>
-  </header>
-  <main>
-    <div class="filme">
-      <h2><a href="https://www.tokyvideo.com/br/video/o-grande-truque-dublado-2006-1080p" target="_blank">O Grande Truque (2006)</a></h2>
-      <p><strong>Sinopse:</strong> Dois mágicos rivais em Londres do século XIX competem ferozmente, levando a consequências trágicas e surpreendentes.</p>
-      <p><strong>Nota IMDb:</strong> 8.5</p>
-    </div>
-    <div class="filme">
-      <h2><a href="https://www.youtube.com/watch?v=wFeWucVd3UE" target="_blank">Amnésia (2000)</a></h2>
-      <p><strong>Sinopse:</strong> Um homem com perda de memória recente tenta encontrar o assassino de sua esposa, usando anotações e tatuagens como pistas.</p>
-      <p><strong>Nota IMDb:</strong> 8.4</p>
-    </div>
-    <div class="filme">
-      <h2><a href="https://www.tokyvideo.com/br/video/os-suspeitos" target="_blank">Os Suspeitos (1995)</a></h2>
-      <p><strong>Sinopse:</strong> Um golpista conta uma história complexa sobre um crime e um misterioso chefão do crime, Keyser Söze.</p>
-      <p><strong>Nota IMDb:</strong> 8.5</p>
-    </div>
-    <div class="filme">
-      <h2>O Predestinado (2014)</h2>
-      <p><strong>Sinopse:</strong> Um agente temporal viaja no tempo para capturar um criminoso que sempre parece escapar.</p>
-      <p><strong>Nota IMDb:</strong> 7.5</p>
-    </div>
-    <div class="filme">
-      <h2><a href="https://www.tokyvideo.com/video/o-misterio-das-duas-irmas-2009-vini7xg" target="_blank">O Mistério das Duas Irmãs (2009)</a></h2>
-      <p><strong>Sinopse:</strong> Após uma internação psiquiátrica, uma jovem retorna para casa e enfrenta eventos sobrenaturais e segredos familiares.</p>
-      <p><strong>Nota IMDb:</strong> 6.3</p>
-    </div>
-    <div class="filme">
-      <h2>As Linhas Tortas de Deus (2022)</h2>
-      <p><strong>Sinopse:</strong> Uma detetive se interna em um hospital psiquiátrico para investigar um assassinato, mas sua sanidade é questionada.</p>
-      <p><strong>Nota IMDb:</strong> 7.0</p>
-    </div>
-    <div class="filme">
-      <h2><a href="https://www.youtube.com/watch?v=iMcJlujSVtE" target="_blank">Um Contratempo (2016)</a></h2>
-      <p><strong>Sinopse:</strong> Um empresário é acusado de assassinato e contrata uma advogada para descobrir a verdade antes que seja tarde demais.</p>
-      <p><strong>Nota IMDb:</strong> 8.0</p>
-    </div>
-    <!-- Adicione os demais filmes seguindo o mesmo padrão -->
-  </main>
-  <footer>
-    <p>Desenvolvido por Liang &copy; 2025</p>
-  </footer>
+  <h1>Filmes by Liang <br> <small>Última atualização: 14-05-2025</small></h1>
+
+  <div class="filme">
+    <h2><a href="https://www.tokyvideo.com/br/video/o-grande-truque-dublado-2006-1080p" target="_blank">O Grande Truque</a></h2>
+    <p>Dois mágicos rivais travam uma batalha para criar a melhor ilusão enquanto sacrificam tudo para enganar um ao outro.</p>
+    <p class="nota">IMDb: 8.5</p>
+  </div>
+
+  <div class="filme">
+    <h2><a href="https://www.youtube.com/watch?v=wFeWucVd3UE" target="_blank">Amnésia</a></h2>
+    <p>Um homem com perda de memória de curto prazo tenta encontrar o assassino de sua esposa, usando notas e tatuagens como pistas.</p>
+    <p class="nota">IMDb: 8.4</p>
+  </div>
+
+  <div class="filme">
+    <h2><a href="https://www.tokyvideo.com/br/video/os-suspeitos" target="_blank">Os Suspeitos</a></h2>
+    <p>Quando a filha de Keller Dover desaparece, ele toma medidas extremas para encontrar o responsável.</p>
+    <p class="nota">IMDb: 8.1</p>
+  </div>
+
+  <div class="filme">
+    <h2><a href="https://www.netflix.com/search?q=O%20Predestinado&jbv=70303302" target="_blank">O Predestinado</a></h2>
+    <p>Um agente temporal viaja no tempo para impedir futuros criminosos, enfrentando um paradoxo surpreendente.</p>
+    <p class="nota">IMDb: 7.5</p>
+  </div>
+
+  <div class="filme">
+    <h2><a href="https://www.tokyvideo.com/video/o-misterio-das-duas-irmas-2009-vini7xg" target="_blank">O Mistério das Duas Irmãs</a></h2>
+    <p>Após retornar do hospital psiquiátrico, uma jovem enfrenta segredos sombrios em sua casa e questiona sua própria sanidade.</p>
+    <p class="nota">IMDb: 6.4</p>
+  </div>
+
+  <div class="filme">
+    <h2><a href="https://www.netflix.com/search?q=As%20Linhas%20Tortas%20de%20Deus&jbv=81245486" target="_blank">As Linhas Tortas de Deus</a></h2>
+    <p>Uma investigadora se interna em um hospital psiquiátrico para solucionar um crime, mas sua própria sanidade é posta em dúvida.</p>
+    <p class="nota">IMDb: 7.0</p>
+  </div>
+
+  <div class="filme">
+    <h2><a href="https://www.youtube.com/watch?v=iMcJlujSVtE" target="_blank">Um Contratempo</a></h2>
+    <p>Um empresário acusado de assassinato contrata uma especialista em preparar testemunhas e precisa desvendar uma teia de mentiras.</p>
+    <p class="nota">IMDb: 8.0</p>
+  </div>
+
+  <div class="filme">
+    <h2><a href="https://www.netflix.com/search?q=O%20Limite%20da%20Trai%C3%A7%C3%A3o&jbv=80200368" target="_blank">O Limite da Traição</a></h2>
+    <p>Uma mulher confessa o assassinato do marido, mas seu advogado desconfia que há algo por trás dessa história.</p>
+    <p class="nota">IMDb: 5.9</p>
+  </div>
+
+  <div class="filme">
+    <h2><a href="https://www.netflix.com/search?q=Vers%C3%B5es%20de%20um%20Crime&jbv=80066080" target="_blank">Versões de um Crime</a></h2>
+    <p>Durante o julgamento de um adolescente, as versões do crime se misturam até revelar a chocante verdade.</p>
+    <p class="nota">IMDb: 6.2</p>
+  </div>
+
+  <div class="filme">
+    <h2><a href="https://www.netflix.com/search?q=O%20Manipulador&jbv=81718708" target="_blank">O Manipulador</a></h2>
+    <p>Após a morte de um importante executivo, um detetive começa a desconfiar que a verdade por trás do crime está longe de ser o que parece.</p>
+    <p class="nota">IMDb: 6.6</p>
+  </div>
+
 </body>
 </html>
