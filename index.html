@@ -1,11 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Meu Site</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Filmes by Liang</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+    }
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #00ffff;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #00ffff;
+    }
+    .update-date {
+      font-size: 0.9em;
+      color: #cccccc;
+    }
+    main {
+      padding: 20px;
+    }
+    .movie {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid #00ffff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    .movie h2 {
+      margin-top: 0;
+      color: #00ffff;
+    }
+    .movie a {
+      color: #00ffff;
+      text-decoration: none;
+    }
+    .movie a:hover {
+      text-decoration: underline;
+    }
+    .imdb-rating {
+      font-weight: bold;
+      color: #ffcc00;
+    }
+    .comments {
+      margin-top: 10px;
+    }
+    .comments textarea {
+      width: 100%;
+      height: 60px;
+      background-color: #1a1a1a;
+      color: #ffffff;
+      border: 1px solid #00ffff;
+      border-radius: 4px;
+      padding: 10px;
+      resize: vertical;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-top: 2px solid #00ffff;
+      font-size: 0.8em;
+      color: #cccccc;
+    }
+  </style>
 </head>
 <body>
-  <h1>Bem-vindo ao meu site!</h1>
-  <p>Este é meu site gratuito usando GitHub Pages.</p>
+  <header>
+    <h1>🎬 Filmes by Liang</h1>
+    <p class="update-date">Última atualização: 14/05/2025</p>
+  </header>
+  <main>
+    <div class="movie">
+      <h2><a href="https://www.tokyvideo.com/br/video/o-grande-truque-dublado-2006-1080p" target="_blank">O Grande Truque (2006)</a></h2>
+      <p>Dois mágicos rivais se envolvem em uma batalha intensa para criar a ilusão definitiva, sacrificando tudo em busca da supremacia no palco.</p>
+      <p class="imdb-rating">Nota IMDb: 8.5</p>
+      <div class="comments">
+        <label for="comment1">Comentários:</label><br/>
+        <textarea id="comment1" placeholder="Escreva seu comentário aqui..."></textarea>
+      </div>
+    </div>
+
+    <div class="movie">
+      <h2><a href="https://www.youtube.com/watch?v=wFeWucVd3UE" target="_blank">Amnésia (2000)</a></h2>
+      <p>Um investigador de seguros com amnésia anterógrada usa notas e tatuagens para caçar o assassino de sua esposa.</p>
+      <p class="imdb-rating">Nota IMDb: 8.4</p>
+      <div class="comments">
+        <label for="comment2">Comentários:</label><br/>
+        <textarea id="comment2" placeholder="Escreva seu comentário aqui..."></textarea>
+      </div>
+    </div>
+
+    <div class="movie">
+      <h2><a href="https://www.tokyvideo.com/br/video/os-suspeitos" target="_blank">Os Suspeitos (2013)</a></h2>
+      <p>Após o desaparecimento de sua filha, um pai desesperado toma medidas extremas enquanto a polícia investiga o caso.</p>
+      <p class="imdb-rating">Nota IMDb: 8.1</p>
+      <div class="comments">
+        <label for="comment3">Comentários:</label><br/>
+        <textarea id="comment3" placeholder="Escreva seu comentário aqui..."></textarea>
+      </div>
+    </div>
+
+    <!-- Adicione mais filmes seguindo o mesmo padrão -->
+
+  </main>
+  <footer>
+    <p>&copy; 2025 Liang. Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>
