@@ -2,60 +2,86 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Filmes by Liang 🎬</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <title>Filmes by Liang - Última atualização 14-05-2025</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f5f5f5;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #222;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      background: #fff;
+      margin: 8px 0;
+      padding: 12px 16px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    a {
+      text-decoration: none;
+      color: #1a73e8;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .label {
+      font-weight: bold;
+      color: #555;
+      margin-left: 8px;
+      font-style: italic;
+    }
+    .trilogia {
+      margin-top: 12px;
+      padding-left: 20px;
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <h1>🎬 Filmes by Liang</h1>
-    <div class="filters">
-      <input type="text" id="searchInput" placeholder="🔍 Buscar filme, ator, sinopse..." />
-      <select id="platformFilter">
-        <option value="">🎞️ Plataforma</option>
-        <option value="Netflix">Netflix</option>
-        <option value="YouTube">YouTube</option>
-        <option value="TokyVideo">TokyVideo</option>
-      </select>
-      <select id="ratingFilter">
-        <option value="">⭐ Nota</option>
-        <option value="4">4.0+</option>
-        <option value="3.5">3.5+</option>
-        <option value="3">3.0+</option>
-      </select>
-      <button id="toggleMode">🌗 Modo</button>
-    </div>
-  </header>
-
-  <main>
-    <section id="recent" class="section">
-      <h2>🆕 Adicionados recentemente</h2>
-      <div id="recentMovies" class="movie-grid"></div>
-    </section>
-
-    <section id="top5" class="section">
-      <h2>🏆 Top 5 do Liang</h2>
-      <div id="topMovies" class="movie-grid"></div>
-    </section>
-
-    <section id="allMovies" class="section">
-      <h2>🎥 Todos os Filmes</h2>
-      <div id="movieList" class="movie-grid"></div>
-    </section>
-  </main>
-
-  <footer>
-    <form id="suggestForm">
-      <h3>✍️ Sugira um filme</h3>
-      <input type="text" id="suggestName" placeholder="Nome do filme" required />
-      <input type="text" id="suggestLink" placeholder="Link (opcional)" />
-      <textarea id="suggestMessage" placeholder="Por que você recomenda?" required></textarea>
-      <button type="submit">📤 Enviar sugestão</button>
-    </form>
-    <p>Atualizado em 14/05/2025 • Desenvolvido por Liang 🎞️</p>
-  </footer>
-
-  <script src="script.js"></script>
+  <h1>Filmes by Liang <br/><small>Última atualização 14-05-2025</small></h1>
+  <ul>
+    <li><a href="https://www.tokyvideo.com/br/video/o-grande-truque-dublado-2006-1080p" target="_blank" rel="noopener noreferrer">O Grande Truque</a></li>
+    <li><a href="https://www.youtube.com/watch?v=wFeWucVd3UE" target="_blank" rel="noopener noreferrer">Amnésia</a></li>
+    <li><a href="https://www.tokyvideo.com/br/video/os-suspeitos" target="_blank" rel="noopener noreferrer">Os Suspeitos</a></li>
+    <li>O predestinado <span class="label">(Netflix)</span></li>
+    <li><a href="https://www.tokyvideo.com/video/o-misterio-das-duas-irmas-2009-vini7xg" target="_blank" rel="noopener noreferrer">O Mistério das Duas irmãs</a></li>
+    <li>As linhas Tortas de Deus <span class="label">(Netflix)</span></li>
+    <li><a href="https://www.youtube.com/watch?v=iMcJlujSVtE" target="_blank" rel="noopener noreferrer">Um Contratempo</a></li>
+    <li>O Limite da Traição <span class="label">(Netflix)</span></li>
+    <li>Versões de um Crime <span class="label">(Netflix)</span></li>
+    <li>Código de Condulta <span class="label">(Netflix)</span></li>
+    <li>Por trás dos Seus Olhos <span class="label">(Netflix)</span></li>
+    <li><a href="https://www.tokyvideo.com/br/video/corra-get-out-filme-completo-dublado-2024" target="_blank" rel="noopener noreferrer">Corra</a></li>
+    <li><a href="https://www.tokyvideo.com/video/garota-exemplar-2014-vini7xg" target="_blank" rel="noopener noreferrer">Garota Exemplar</a></li>
+    <li>O Predestinado <span class="label">(Netflix)</span></li>
+    <li>As Duas Faces de um crime <span class="label">(Netflix)</span></li>
+    <li>
+      Trilogia:
+      <ul class="trilogia">
+        <li><a href="https://www.tokyvideo.com/br/video/corpo-fechado-2000-filme-completo-dublado" target="_blank" rel="noopener noreferrer">Corpo Fechado</a></li>
+        <li><a href="https://www.tokyvideo.com/video/fragmentado-2016-thriller-terror-1h-57m" target="_blank" rel="noopener noreferrer">Fragmentado</a></li>
+        <li><a href="https://www.tokyvideo.com/video/filme-vidro-dublado" target="_blank" rel="noopener noreferrer">Vidro</a></li>
+      </ul>
+    </li>
+    <li><a href="https://www.tokyvideo.com/video/o-segredo-dos-seus-olhos-2009-cine-casinha-2" target="_blank" rel="noopener noreferrer">O Segredo dos Seus Olhos</a></li>
+    <li>O Plano Perfeito <span class="label">(Netflix)</span></li>
+    <li>Onde está segunda? <span class="label">(Netflix)</span></li>
+    <li><a href="https://www.tokyvideo.com/br/video/caso-39-2009" target="_blank" rel="noopener noreferrer">Caso 39</a></li>
+    <li>Fratura <span class="label">(Netflix)</span></li>
+    <li>Rastros de um Sequestro <span class="label">(Netflix)</span></li>
+    <li>Durante a Tormenta</li>
+    <li><a href="https://www.tokyvideo.com/video/a-chave-mestra-2005-vini7xg" target="_blank" rel="noopener noreferrer">A Chave Mestra</a></li>
+    <li><a href="https://www.tokyvideo.com/br/video/incendios-2010-filme-completo-legendado-online" target="_blank" rel="noopener noreferrer">Incêndios</a> <span class="label">(legendado)</span></li>
+    <li><a href="https://www.tokyvideo.com/video/o-segredo-de-marrowbone-2017-vini7xg" target="_blank" rel="noopener noreferrer">O Segredo de Marrowbone</a></li>
+  </ul>
 </body>
 </html>
