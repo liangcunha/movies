@@ -21,21 +21,39 @@ header p {
     margin-bottom: 10px;
 }
 
-#sorting-options {
-    text-align: center;
+#controls {
+    display: flex;
+    justify-content: center; /* Centralizar os controles */
+    gap: 20px; /* Espaço entre os grupos de controles */
     margin-bottom: 15px;
+    align-items: center; /* Alinhar verticalmente os elementos */
 }
 
-#sorting-options label {
+#sorting-options,
+#filter-options,
+#search-options {
+    display: flex;
+    align-items: center;
+}
+
+#sorting-options label,
+#filter-options label,
+#search-options label {
     margin-right: 5px;
     color: #fff;
 }
 
-#sorting-options select {
+#sorting-options select,
+#filter-options select,
+#search-options input[type="text"] {
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
     color: #333;
+}
+
+#search-options input[type="text"] {
+    width: 200px; /* Ajuste a largura conforme necessário */
 }
 
 #last-updated {

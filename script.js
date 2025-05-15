@@ -3,9 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const movieListContainer = document.getElementById('movie-list');
     const sortBySelect = document.getElementById('sort-by');
     const filterPlatformSelect = document.getElementById('filter-platform');
+    const searchTitleInput = document.getElementById('search-title');
     const lastUpdatedElement = document.getElementById('last-updated');
 
-    const lastUpdatedDate = '15/03/2022';
+    const lastUpdatedDate = '12/03/2022';
 
     function formatDate(dateString) {
         const date = new Date(dateString);
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return movie;
             });
 
-            populatePlatformFilter(allMovies); // Preenche o filtro de plataformas
+            populatePlatformFilter(allMovies);
             displayMovies(allMovies);
         })
         .catch(error => {
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     function populatePlatformFilter(movies) {
-        const platforms = [...new Set(movies.map(movie => movie.plataforma).filter(Boolean))]; // Obtém plataformas únicas e não vazias
+        const platforms = [...new Set(movies.map(movie => movie.plataforma).filter(Boolean))];
         platforms.forEach(platform => {
             const option = document.createElement('option');
             option.value = platform;
@@ -57,22 +58,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    sortBySelect.addEventListener('change', function() {
-        applyFiltersAndSort();
-    });
-
-    filterPlatformSelect.addEventListener('change', function() {
-        applyFiltersAndSort();
-    });
+    sortBySelect.addEventListener('change', applyFiltersAndSort);
+    filterPlatformSelect.addEventListener('change', applyFiltersAndSort);
+    searchTitleInput.addEventListener('input', applyFiltersAndSort);
 
     function applyFiltersAndSort() {
         const sortBy = sortBySelect.value;
         const selectedPlatform = filterPlatformSelect.value;
+        const searchTerm = searchTitleInput.value.toLowerCase();
 
         let filteredMovies = [...allMovies];
 
         if (selectedPlatform) {
             filteredMovies = filteredMovies.filter(movie => movie.plataforma === selectedPlatform);
+        }
+
+        if (searchTerm) {
+            filteredMovies = filteredMovies.filter(movie =>
+                movie.titulo.toLowerCase().includes(searchTerm)
+            );
         }
 
         let sortedMovies = [...filteredMovies];
@@ -108,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 posterHtml = `<div class="poster-container"><img src="${imageUrl}" alt="Pôster de ${movie.titulo}"></div>`;
             }
 
-            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Ver mais</a></p>` : '';
+            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Assistir Agora</a></p>` : '';
             const anoHtml = movie.ano ? `<p><strong>Ano:</strong> ${movie.ano}</p>` : '';
 
             movieCard.innerHTML = `

@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Dicas de Filmes</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Minhas Dicas de Filmes</h1>
-        <p>Uma coleção dos filmes que mais gosto e minhas opiniões sobre eles.</p>
+<header>
+    <h1>Minhas Dicas de Filmes</h1>
+    <p>Uma coleção dos filmes que mais gosto e minhas avaliações sobre eles.</p>
+    <div id="controls">
         <div id="sorting-options">
             <label for="sort-by">Ordenar por:</label>
             <select id="sort-by">
@@ -22,19 +14,24 @@
             <label for="filter-platform">Filtrar por Plataforma:</label>
             <select id="filter-platform">
                 <option value="">Todas</option>
-                </select>
+            </select>
         </div>
-        <p id="last-updated">Última atualização: 2025-05-15</p>
-    </header>
+        <div id="search-options">
+            <label for="search-title">Buscar por Nome:</label>
+            <input type="text" id="search-title" placeholder="Digite o nome do filme">
+        </div>
+    </div>
+    <p id="last-updated">Última atualização: 15/05/2025</p>
+</header>
 
-    <main id="movie-list">
-        <p>Carregando filmes...</p>
-    </main>
+<main id="movie-list">
+    <p>Carregando filmes...</p>
+</main>
 
-    <footer>
-        <p>&copy; 2025 Liang Cunha</p>
-    </footer>
+<footer>
+    <p>&copy; 2025 Liang Cunha</p>
+</footer>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
