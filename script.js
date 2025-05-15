@@ -2,11 +2,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pub?output=csv';
     const movieListContainer = document.getElementById('movie-list');
     const sortBySelect = document.getElementById('sort-by');
+    const filterPlatformSelect = document.getElementById('filter-platform');
     const lastUpdatedElement = document.getElementById('last-updated');
 
-    const lastUpdatedDate = '15/05/2025';
+    const lastUpdatedDate = '15/03/2022';
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
     if (lastUpdatedElement) {
-        lastUpdatedElement.textContent = `Última atualização: ${lastUpdatedDate}`;
+        lastUpdatedElement.textContent = `Última atualização: ${formatDate(lastUpdatedDate)}`;
     }
 
     let allMovies = [];
@@ -29,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return movie;
             });
 
+            populatePlatformFilter(allMovies); // Preenche o filtro de plataformas
             displayMovies(allMovies);
         })
         .catch(error => {
@@ -36,9 +47,35 @@ document.addEventListener('DOMContentLoaded', function() {
             movieListContainer.innerHTML = '<p>Erro ao carregar os filmes.</p>';
         });
 
+    function populatePlatformFilter(movies) {
+        const platforms = [...new Set(movies.map(movie => movie.plataforma).filter(Boolean))]; // Obtém plataformas únicas e não vazias
+        platforms.forEach(platform => {
+            const option = document.createElement('option');
+            option.value = platform;
+            option.textContent = platform;
+            filterPlatformSelect.appendChild(option);
+        });
+    }
+
     sortBySelect.addEventListener('change', function() {
-        const sortBy = this.value;
-        let sortedMovies = [...allMovies];
+        applyFiltersAndSort();
+    });
+
+    filterPlatformSelect.addEventListener('change', function() {
+        applyFiltersAndSort();
+    });
+
+    function applyFiltersAndSort() {
+        const sortBy = sortBySelect.value;
+        const selectedPlatform = filterPlatformSelect.value;
+
+        let filteredMovies = [...allMovies];
+
+        if (selectedPlatform) {
+            filteredMovies = filteredMovies.filter(movie => movie.plataforma === selectedPlatform);
+        }
+
+        let sortedMovies = [...filteredMovies];
 
         switch (sortBy) {
             case 'titulo':
@@ -56,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
         displayMovies(sortedMovies);
-    });
+    }
 
     function displayMovies(movies) {
         movieListContainer.innerHTML = '';
@@ -71,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 posterHtml = `<div class="poster-container"><img src="${imageUrl}" alt="Pôster de ${movie.titulo}"></div>`;
             }
 
-            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Assistir Agora</a></p>` : '';
+            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Ver mais</a></p>` : '';
             const anoHtml = movie.ano ? `<p><strong>Ano:</strong> ${movie.ano}</p>` : '';
 
             movieCard.innerHTML = `
