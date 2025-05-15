@@ -31,18 +31,18 @@ document.addEventListener('DOMContentLoaded', function() {
             movieCard.classList.add('movie-card');
 
             let posterHtml = '';
-            if (movie.Poster) {
-                posterHtml = `<div class="poster-container"><img src="${movie.Poster}" alt="Pôster de ${movie.Título}"></div>`;
+            if (movie.capa_url) {
+                posterHtml = `<div class="poster-container"><img src="${movie.capa_url}" alt="Pôster de ${movie.titulo}"></div>`;
             }
 
             movieCard.innerHTML = `
                 ${posterHtml}
-                <h3>${movie.Título}</h3>
-                ${movie.Diretor ? `<p><strong>Diretor:</strong> ${movie.Diretor}</p>` : ''}
-                ${movie.Ano ? `<p><strong>Ano:</strong> ${movie.Ano}</p>` : ''}
-                ${movie.Gênero ? `<p><strong>Gênero:</strong> ${movie.Gênero}</p>` : ''}
-                ${movie.Nota ? `<p><strong>Minha Nota:</strong> ${movie.Nota}</p>` : ''}
-                ${movie.Comentário ? `<p><strong>Minha Dica:</strong> ${movie.Comentário}</p>` : ''}
+                <h3>${movie.titulo}</h3>
+                ${movie.sinopse ? `<p><strong>Sinopse:</strong> ${movie.sinopse}</p>` : ''}
+                ${movie.nota ? `<p><strong>Minha Nota:</strong> ${movie.nota}</p>` : ''}
+                ${movie.plataforma ? `<p><strong>Plataforma:</strong> ${movie.plataforma}</p>` : ''}
+                ${movie.idioma_legenda ? `<p><strong>Idioma/Legenda:</strong> ${movie.idioma_legenda}</p>` : ''}
+                ${movie.link ? `<p><a href="${movie.link}" target="_blank">Ver mais</a></p>` : ''}
             `;
             movieListContainer.appendChild(movieCard);
         });
