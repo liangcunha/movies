@@ -1,269 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Filmes by Liang - Estilo Tech & Atualizado</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-
-  body {
-    margin: 0;
-    background: #0f111a;
-    color: #cfd8dc;
-    font-family: 'Roboto Mono', monospace;
-    min-height: 100vh;
-    padding: 20px;
-  }
-
-  h1 {
-    text-align: center;
-    color: #00ffe7;
-    margin-bottom: 5px;
-    font-weight: 700;
-    font-size: 2.8rem;
-    letter-spacing: 2px;
-    text-shadow: 0 0 8px #00ffe7;
-  }
-
-  small {
-    display: block;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 1rem;
-    color: #33fff0cc;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-  }
-
-  .card {
-    background: linear-gradient(135deg, #001f2d, #00394d);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px #00ffe7aa;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 32px #00fffeb0;
-  }
-
-  .card img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-bottom: 3px solid #00ffe7;
-  }
-
-  .card-content {
-    padding: 18px 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #00ffe7;
-    margin: 0 0 6px;
-    text-shadow: 0 0 8px #00ffe7;
-  }
-
-  .links {
-    margin-bottom: 12px;
-  }
-
-  .links a {
-    color: #33fff0;
-    text-decoration: none;
-    font-weight: 600;
-    margin-right: 12px;
-    font-size: 0.9rem;
-    transition: color 0.25s ease;
-  }
-
-  .links a:hover {
-    color: #00fff0;
-  }
-
-  .sinopse {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    color: #a0d9db;
-    flex-grow: 1;
-    margin-bottom: 14px;
-  }
-
-  .nota {
-    align-self: flex-start;
-    background: #00ffe7;
-    color: #001f2d;
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 6px 12px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px #00ffe7;
-    letter-spacing: 1.2px;
-    user-select: none;
-  }
-
-  @media (max-width: 600px) {
-    .card img {
-      height: 280px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Filmes by Liang</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
     }
-  }
-</style>
+    h1 {
+      text-align: center;
+      color: #00ffe1;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .card {
+      background: #1f1f1f;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 0 10px #00ffe1a0;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      height: 300px;
+      object-fit: cover;
+    }
+    .info {
+      margin-top: 10px;
+    }
+    .info h2 {
+      font-size: 1.1rem;
+      color: #00ffe1;
+    }
+    .info p {
+      font-size: 0.9rem;
+    }
+    .note {
+      font-weight: bold;
+      color: gold;
+    }
+    .link a {
+      color: #00ffe1;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-  <h1>Filmes by Liang</h1>
-  <small>Última atualização 15-05-2025 | Ordenado pela nota no Filmow</small>
+  <h1>🎬 Filmes by Liang - teste1</h1>
+  <div class="grid" id="filmes"></div>
 
-  <div class="container">
+  <script>
+    async function carregarFilmes() {
+      const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pub?output=csv";
+      const response = await fetch(url);
+      const data = await response.text();
 
-    <!-- Cartão para cada filme -->
-    <!-- Exemplo completo: -->
-    <!-- Filme: O Segredo dos Seus Olhos - Nota: 9.3 -->
+      const linhas = data.split("\n").slice(1);
+      const container = document.getElementById("filmes");
 
-    <div class="card">
-      <img src="https://br.web.img3.acsta.net/c_310_420/pictures/14/05/05/11/06/154477.jpg" alt="O Segredo dos Seus Olhos" />
-      <div class="card-content">
-        <h2 class="title">O Segredo dos Seus Olhos</h2>
-        <div class="links">
-          <a href="https://www.tokyvideo.com/video/o-segredo-dos-seus-olhos-2009-cine-casinha-2" target="_blank" rel="noopener noreferrer">Assistir</a>
-          <a href="https://filmow.com/o-segredo-dos-seus-olhos-t4200/" target="_blank" rel="noopener noreferrer">Filmow</a>
-        </div>
-        <p class="sinopse">Um funcionário judicial aposentado decide escrever um romance baseado em um caso de assassinato não resolvido que o assombrou por décadas, revelando segredos e emoções profundas.</p>
-        <div class="nota">9.3</div>
-      </div>
-    </div>
+      linhas.forEach((linha) => {
+        const [numero, titulo, nota, sinopse, plataforma, idioma, capa, link] = linha.split(",");
 
-    <div class="card">
-      <img src="https://br.web.img3.acsta.net/c_310_420/pictures/16/01/28/23/52/326949.jpg" alt="Fragmentado" />
-      <div class="card-content">
-        <h2 class="title">Fragmentado</h2>
-        <div class="links">
-          <a href="https://www.tokyvideo.com/video/fragmentado-2016-thriller-terror-1h-57m" target="_blank" rel="noopener noreferrer">Assistir</a>
-          <a href="https://filmow.com/fragmentado-t151163/" target="_blank" rel="noopener noreferrer">Filmow</a>
-        </div>
-        <p class="sinopse">Um homem com 23 personalidades diferentes sequestra três adolescentes e deve lutar contra seu próprio lado sombrio para protegê-las.</p>
-        <div class="nota">8.8</div>
-      </div>
-    </div>
+        if (!titulo || titulo.trim() === "") return;
 
-    <div class="card">
-      <img src="https://br.web.img3.acsta.net/c_310_420/pictures/20/11/12/00/15/2088526.jpg" alt="Corra" />
-      <div class="card-content">
-        <h2 class="title">Corra</h2>
-        <div class="links">
-          <a href="https://www.tokyvideo.com/br/video/corra-get-out-filme-completo-dublado-2024" target="_blank" rel="noopener noreferrer">Assistir</a>
-          <a href="https://filmow.com/corra-t129824/" target="_blank" rel="noopener noreferrer">Filmow</a>
-        </div>
-        <p class="sinopse">Um jovem negro visita a família de sua namorada branca e logo percebe uma série de segredos perturbadores escondidos sob a superfície.</p>
-        <div class="nota">8.5</div>
-      </div>
-    </div>
+        const card = document.createElement("div");
+        card.className = "card";
 
-    <div class="card">
-      <img src="https://br.web.img3.acsta.net/c_310_420/pictures/20/09/07/21/14/1528881.jpg" alt="Garota Exemplar" />
-      <div class="card-content">
-        <h2 class="title">Garota Exemplar</h2>
-        <div class="links">
-          <a href="https://www.tokyvideo.com/video/garota-exemplar-2014-vini7xg" target="_blank" rel="noopener noreferrer">Assistir</a>
-          <a href="https://filmow.com/garota-exemplar-t81437/" target="_blank" rel="noopener noreferrer">Filmow</a>
-        </div>
-        <p class="sinopse">No dia do quinto aniversário de casamento, uma mulher desaparece misteriosamente, e seu marido se torna o principal suspeito.</p>
-        <div class="nota">8.3</div>
-      </div>
-    </div>
+        card.innerHTML = `
+          <img src="${capa}" alt="${titulo}" onerror="this.src='https://via.placeholder.com/300x450?text=Sem+Capa'">
+          <div class="info">
+            <h2>${numero}. ${titulo}</h2>
+            <p class="note">⭐ Nota: ${nota}</p>
+            <p><strong>Plataforma:</strong> ${plataforma}</p>
+            <p><strong>Idioma/Legenda:</strong> ${idioma}</p>
+            <p>${sinopse}</p>
+            <div class="link"><a href="${link}" target="_blank">Assistir</a></div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
 
-    <div class="card">
-      <img src="https://br.web.img3.acsta.net/c_310_420/pictures/21/02/24/19/42/2743067.jpg" alt="O Predestinado" />
-      <div class="card-content">
-        <h2 class="title">O Predestinado</h2>
-        <div class="links">
-          <a href="https://www.netflix.com/title/70292501" target="_blank" rel="noopener noreferrer">Netflix</a>
-          <a href="https://filmow.com/o-predestinado-t210896/" target="_blank" rel="noopener noreferrer">Filmow</a>
-        </div>
-        <p class="sinopse">Um agente temporal é enviado em missões para impedir crimes, mas precisa lidar com paradoxos e seu próprio destino.</p>
-        <div class="nota">8.2</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://br.web.img3.acsta.net/c_310_420/pictures/14/02/07/00/09/308691.jpg" alt="O Grande Truque" />
-      <div class="card-content">
-        <h2 class="title">O Grande Truque</h2>
-        <div class="links">
-          <a href="https://www.tokyvideo.com/br/video/o-grande-truque-dublado-2006-1080p" target="_blank" rel="noopener noreferrer">Assistir</a>
-          <a href="https://filmow.com/o-grande-truque-t3931/" target="_blank" rel="noopener noreferrer">Filmow</a>
-        </div>
-        <p class="sinopse">Dois mágicos rivais se envolvem em uma perigosa competição, buscando o truque final que irá surpreender a todos.</p>
-        <div class="nota">8.2</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://br.web.img3.acsta.net/c_310_420/pictures/20/12/03/17/36/4925126.jpg" alt="O Contador" />
-      <div class="card-content">
-        <h2 class="title">O Contador</h2>
-        <div class="links">
-          <a href="https://www.tokyvideo.com/video/o-contador-2016-1h-48m-completo" target="_blank" rel="noopener noreferrer">Assistir</a>
-          <a href="https://filmow.com/o-contador-t121841/" target="_blank" rel="noopener noreferrer">Filmow</a>
-        </div>
-        <p class="sinopse">Um contador autista trabalha para organizações criminosas, mas seu talento o coloca no centro de uma investigação perigosa.</p>
-        <div class="nota">8.1</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://br.web.img3.acsta.net/c_310_420/pictures/20/12/05/10/36/5730604.jpg" alt="Código de Conduta" />
-      <div class="card-content">
-        <h2 class="title">Código de Conduta</h2>
-        <div class="links">
-          <a href="https://www.tokyvideo.com/video/codigo-de-conduta-2016-1h-45m" target="_blank" rel="noopener noreferrer">Assistir</a>
-          <a href="https://filmow.com/codigo-de-conduta-t126074/" target="_blank" rel="noopener noreferrer">Filmow</a>
-        </div>
-        <p class="sinopse">Um ex-agente do governo descobre uma conspiração mortal ao tentar limpar seu nome e proteger sua família.</p>
-        <div class="nota">7.9</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://br.web.img3.acsta.net/c_310_420/pictures/18/06/14/00/33/5616936.jpg" alt="O Livro de Eli" />
-      <div class="card-content">
-        <h2 class="title">O Livro de Eli</h2>
-        <div class="links">
-          <a href="https://www.tokyvideo.com/video/o-livro-de-eli-2010-dublado-1080p" target="_blank" rel="noopener noreferrer">Assistir</a>
-          <a href="https://filmow.com/o-livro-de-eli-t3990/" target="_blank" rel="noopener noreferrer">Filmow</a>
-        </div>
-        <p class="sinopse">Num mundo pós-apocalíptico, um homem protege um livro sagrado que pode salvar a humanidade.</p>
-        <div class="nota">7.9</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://br.web.img3.acsta.net/c_310_420/pictures/16/03/31/14/33/188368.jpg" alt="Inocente" />
-      <div class="card-content">
-        <h2 class="title">Inocente</h2>
-        <div class="links">
-          <a href="https://www.tokyvideo.com/video/inocente-2016-dublado" target="_blank" rel="noopener noreferrer">Assistir</a>
-          <a href="https://filmow.com/inocente-t176238/" target="_blank" rel="noopener noreferrer">Filmow</a>
-        </div>
-        <p class="sinopse">Um suspense policial onde um homem luta para provar sua inocência após ser acusado de um crime brutal.</p>
-        <div class="nota">7.8</div>
-      </div>
-    </div>
-
-  </div>
+    carregarFilmes();
+  </script>
 </body>
 </html>
