@@ -34,11 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
             movieCard.classList.add('movie-card');
 
             let posterHtml = '';
+            let imageUrl = '';
             if (movie.capa_url) {
-                // Extrair a URL da imagem da função IMAGE() do Google Sheets
                 const imageUrlMatch = movie.capa_url.match(/=image\("([^"]+)"\)/i);
-                const imageUrl = imageUrlMatch ? imageUrlMatch[1] : movie.capa_url;
+                imageUrl = imageUrlMatch ? imageUrlMatch[1] : movie.capa_url;
+                console.log("URL da capa:", imageUrl); // Adicionado log para verificar a URL
                 posterHtml = `<div class="poster-container"><img src="${imageUrl}" alt="Pôster de ${movie.titulo}"></div>`;
+            } else {
+                console.log("URL da capa não encontrada para:", movie.titulo); // Log se não houver URL
             }
 
             movieCard.innerHTML = `
