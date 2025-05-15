@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchTitleInput = document.getElementById('search-title');
     const lastUpdatedElement = document.getElementById('last-updated');
 
-    const lastUpdatedDate = '15/05/2025';
+    const lastUpdatedDate = '15-05-2025';
 
     function formatDate(dateString) {
         const date = new Date(dateString);
