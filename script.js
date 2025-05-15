@@ -38,11 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (movie.capa_url) {
                 const imageUrlMatch = movie.capa_url.match(/=image\("([^"]+)"\)/i);
                 imageUrl = imageUrlMatch ? imageUrlMatch[1] : movie.capa_url;
-                console.log("URL da capa:", imageUrl); // Adicionado log para verificar a URL
+                console.log("URL da capa:", imageUrl);
                 posterHtml = `<div class="poster-container"><img src="${imageUrl}" alt="Pôster de ${movie.titulo}"></div>`;
             } else {
-                console.log("URL da capa não encontrada para:", movie.titulo); // Log se não houver URL
+                console.log("URL da capa não encontrada para:", movie.titulo);
             }
+
+            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Ver mais</a></p>` : '';
 
             movieCard.innerHTML = `
                 ${posterHtml}
@@ -51,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${movie.nota ? `<p><strong>Minha Nota:</strong> ${movie.nota}</p>` : ''}
                 ${movie.plataforma ? `<p><strong>Plataforma:</strong> ${movie.plataforma}</p>` : ''}
                 ${movie.idioma_legenda ? `<p><strong>Idioma/Legenda:</strong> ${movie.idioma_legenda}</p>` : ''}
-                ${movie.link ? `<p><a href="${movie.link}" target="_blank">Ver mais</a></p>` : ''}
+                ${linkHtml}
             `;
             movieListContainer.appendChild(movieCard);
         });
