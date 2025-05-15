@@ -5,19 +5,27 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(csvUrl)
         .then(response => response.text())
         .then(data => {
-            const rows = data.split('\n').map(row => row.split(','));
-            const headers = rows[0].map(header => header.trim());
-            const movies = [];
+            const rows = data.split('\n').slice(1).map(row => {
+                // Usar uma expressão regular para dividir a linha por vírgulas,
+                // mas mantendo as vírgulas dentro de aspas duplas.
+                const values = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+                return values ? values.map(v => v.trim().replace(/^"/, '').replace(/"$/, '')) : [];
+            });
 
-            for (let i = 1; i < rows.length; i++) {
-                const movieData = {};
-                for (let j = 0; j < headers.length; j++) {
-                    movieData[headers[j]] = rows[i][j] ? rows[i][j].trim() : '';
-                }
-                movies.push(movieData);
-            }
-
-            displayMovies(movies);
+            // Obter os cabeçalhos da primeira linha (removendo aspas se existirem)
+            fetch(csvUrl)
+                .then(response => response.text())
+                .then(headerData => {
+                    const headers = headerData.split('\n')[0].split(',').map(header => header.trim().replace(/^"/, '').replace(/"$/, ''));
+                    const movies = rows.map(rowValues => {
+                        const movieData = {};
+                        headers.forEach((header, index) => {
+                            movieData[header] = rowValues[index] || '';
+                        });
+                        return movieData;
+                    });
+                    displayMovies(movies);
+                });
         })
         .catch(error => {
             console.error('Erro ao buscar os dados:', error);
@@ -25,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     function displayMovies(movies) {
-        movieListContainer.innerHTML = ''; // Limpa a mensagem de "Carregando..."
+        movieListContainer.innerHTML = '';
         movies.forEach(movie => {
             const movieCard = document.createElement('div');
             movieCard.classList.add('movie-card');
