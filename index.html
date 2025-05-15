@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dicas de Filmes do Liang</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Minhas Dicas de Filmes</h1>
-        <p>Uma coleção dos filmes que mais gosto e minhas avaliações sobre eles.</p>
-    </header>
-
-    <main id="movie-list">
+<header>
+    <h1>Minhas Dicas de Filmes</h1>
+    <p>Uma coleção dos filmes que mais gosto e minhas opiniões sobre eles.</p>
     <div id="sorting-options">
         <label for="sort-by">Ordenar por:</label>
         <select id="sort-by">
@@ -21,13 +9,18 @@
             <option value="nota">Nota</option>
         </select>
     </div>
+    <p id="last-updated">Última atualização: Carregando...</p>
+</header>
+
+<main id="movie-list">
     <p>Carregando filmes...</p>
 </main>
 
-    <footer>
-        <p>&copy; 2025 Liang Cunha</p>
-    </footer>
+<footer>
+    <p>&copy; 2025 Liang Cunha</p>
+    <p id="last-updated-footer">Última atualização: Carregando...</p>
+</footer>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
