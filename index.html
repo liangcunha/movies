@@ -1,104 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Filmes by Liang</title>
-  <style>
-    body {
-      background-color: #0f0f0f;
-      color: #00ffe1;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      color: #00ffc3;
-      border-bottom: 2px solid #00ffc3;
-      padding-bottom: 10px;
-    }
-    .filme {
-      margin: 20px 0;
-      padding: 15px;
-      background-color: #1f1f1f;
-      border-left: 5px solid #00ffe1;
-      border-radius: 5px;
-    }
-    .filme a {
-      color: #ff4081;
-      text-decoration: none;
-    }
-    .filme a:hover {
-      text-decoration: underline;
-    }
-    .nota {
-      font-weight: bold;
-      color: #ffe100;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filmes by Liang 🎬</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 <body>
-  <h1>Filmes by Liang <br> <small>Última atualização: 14-05-2025</small></h1>
+  <header class="header">
+    <h1>🎬 Filmes by Liang</h1>
+    <div class="filters">
+      <input type="text" id="searchInput" placeholder="🔍 Buscar filme, ator, sinopse..." />
+      <select id="platformFilter">
+        <option value="">🎞️ Plataforma</option>
+        <option value="Netflix">Netflix</option>
+        <option value="YouTube">YouTube</option>
+        <option value="TokyVideo">TokyVideo</option>
+      </select>
+      <select id="ratingFilter">
+        <option value="">⭐ Nota</option>
+        <option value="4">4.0+</option>
+        <option value="3.5">3.5+</option>
+        <option value="3">3.0+</option>
+      </select>
+      <button id="toggleMode">🌗 Modo</button>
+    </div>
+  </header>
 
-  <div class="filme">
-    <h2><a href="https://www.tokyvideo.com/br/video/o-grande-truque-dublado-2006-1080p" target="_blank">O Grande Truque</a></h2>
-    <p>Dois mágicos rivais travam uma batalha para criar a melhor ilusão enquanto sacrificam tudo para enganar um ao outro.</p>
-    <p class="nota">IMDb: 8.5</p>
-  </div>
+  <main>
+    <section id="recent" class="section">
+      <h2>🆕 Adicionados recentemente</h2>
+      <div id="recentMovies" class="movie-grid"></div>
+    </section>
 
-  <div class="filme">
-    <h2><a href="https://www.youtube.com/watch?v=wFeWucVd3UE" target="_blank">Amnésia</a></h2>
-    <p>Um homem com perda de memória de curto prazo tenta encontrar o assassino de sua esposa, usando notas e tatuagens como pistas.</p>
-    <p class="nota">IMDb: 8.4</p>
-  </div>
+    <section id="top5" class="section">
+      <h2>🏆 Top 5 do Liang</h2>
+      <div id="topMovies" class="movie-grid"></div>
+    </section>
 
-  <div class="filme">
-    <h2><a href="https://www.tokyvideo.com/br/video/os-suspeitos" target="_blank">Os Suspeitos</a></h2>
-    <p>Quando a filha de Keller Dover desaparece, ele toma medidas extremas para encontrar o responsável.</p>
-    <p class="nota">IMDb: 8.1</p>
-  </div>
+    <section id="allMovies" class="section">
+      <h2>🎥 Todos os Filmes</h2>
+      <div id="movieList" class="movie-grid"></div>
+    </section>
+  </main>
 
-  <div class="filme">
-    <h2><a href="https://www.netflix.com/search?q=O%20Predestinado&jbv=70303302" target="_blank">O Predestinado</a></h2>
-    <p>Um agente temporal viaja no tempo para impedir futuros criminosos, enfrentando um paradoxo surpreendente.</p>
-    <p class="nota">IMDb: 7.5</p>
-  </div>
+  <footer>
+    <form id="suggestForm">
+      <h3>✍️ Sugira um filme</h3>
+      <input type="text" id="suggestName" placeholder="Nome do filme" required />
+      <input type="text" id="suggestLink" placeholder="Link (opcional)" />
+      <textarea id="suggestMessage" placeholder="Por que você recomenda?" required></textarea>
+      <button type="submit">📤 Enviar sugestão</button>
+    </form>
+    <p>Atualizado em 14/05/2025 • Desenvolvido por Liang 🎞️</p>
+  </footer>
 
-  <div class="filme">
-    <h2><a href="https://www.tokyvideo.com/video/o-misterio-das-duas-irmas-2009-vini7xg" target="_blank">O Mistério das Duas Irmãs</a></h2>
-    <p>Após retornar do hospital psiquiátrico, uma jovem enfrenta segredos sombrios em sua casa e questiona sua própria sanidade.</p>
-    <p class="nota">IMDb: 6.4</p>
-  </div>
-
-  <div class="filme">
-    <h2><a href="https://www.netflix.com/search?q=As%20Linhas%20Tortas%20de%20Deus&jbv=81245486" target="_blank">As Linhas Tortas de Deus</a></h2>
-    <p>Uma investigadora se interna em um hospital psiquiátrico para solucionar um crime, mas sua própria sanidade é posta em dúvida.</p>
-    <p class="nota">IMDb: 7.0</p>
-  </div>
-
-  <div class="filme">
-    <h2><a href="https://www.youtube.com/watch?v=iMcJlujSVtE" target="_blank">Um Contratempo</a></h2>
-    <p>Um empresário acusado de assassinato contrata uma especialista em preparar testemunhas e precisa desvendar uma teia de mentiras.</p>
-    <p class="nota">IMDb: 8.0</p>
-  </div>
-
-  <div class="filme">
-    <h2><a href="https://www.netflix.com/search?q=O%20Limite%20da%20Trai%C3%A7%C3%A3o&jbv=80200368" target="_blank">O Limite da Traição</a></h2>
-    <p>Uma mulher confessa o assassinato do marido, mas seu advogado desconfia que há algo por trás dessa história.</p>
-    <p class="nota">IMDb: 5.9</p>
-  </div>
-
-  <div class="filme">
-    <h2><a href="https://www.netflix.com/search?q=Vers%C3%B5es%20de%20um%20Crime&jbv=80066080" target="_blank">Versões de um Crime</a></h2>
-    <p>Durante o julgamento de um adolescente, as versões do crime se misturam até revelar a chocante verdade.</p>
-    <p class="nota">IMDb: 6.2</p>
-  </div>
-
-  <div class="filme">
-    <h2><a href="https://www.netflix.com/search?q=O%20Manipulador&jbv=81718708" target="_blank">O Manipulador</a></h2>
-    <p>Após a morte de um importante executivo, um detetive começa a desconfiar que a verdade por trás do crime está longe de ser o que parece.</p>
-    <p class="nota">IMDb: 6.6</p>
-  </div>
-
+  <script src="script.js"></script>
 </body>
 </html>
