@@ -5,27 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(csvUrl)
         .then(response => response.text())
         .then(data => {
-            const rows = data.split('\n').slice(1).map(row => {
-                // Usar uma expressão regular para dividir a linha por vírgulas,
-                // mas mantendo as vírgulas dentro de aspas duplas.
+            const rows = data.split('\n');
+            const headers = rows[0].split(',').map(header => header.trim().replace(/^"/, '').replace(/"$/, ''));
+            const moviesData = rows.slice(1).map(row => {
                 const values = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
                 return values ? values.map(v => v.trim().replace(/^"/, '').replace(/"$/, '')) : [];
             });
 
-            // Obter os cabeçalhos da primeira linha (removendo aspas se existirem)
-            fetch(csvUrl)
-                .then(response => response.text())
-                .then(headerData => {
-                    const headers = headerData.split('\n')[0].split(',').map(header => header.trim().replace(/^"/, '').replace(/"$/, ''));
-                    const movies = rows.map(rowValues => {
-                        const movieData = {};
-                        headers.forEach((header, index) => {
-                            movieData[header] = rowValues[index] || '';
-                        });
-                        return movieData;
-                    });
-                    displayMovies(movies);
+            const movies = moviesData.map(rowValues => {
+                const movie = {};
+                headers.forEach((header, index) => {
+                    movie[header] = rowValues[index] || '';
                 });
+                return movie;
+            });
+
+            displayMovies(movies);
         })
         .catch(error => {
             console.error('Erro ao buscar os dados:', error);
@@ -40,7 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let posterHtml = '';
             if (movie.capa_url) {
-                posterHtml = `<div class="poster-container"><img src="${movie.capa_url}" alt="Pôster de ${movie.titulo}"></div>`;
+                // Extrair a URL da imagem da função IMAGE() do Google Sheets
+                const imageUrlMatch = movie.capa_url.match(/=image\("([^"]+)"\)/i);
+                const imageUrl = imageUrlMatch ? imageUrlMatch[1] : movie.capa_url;
+                posterHtml = `<div class="poster-container"><img src="${imageUrl}" alt="Pôster de ${movie.titulo}"></div>`;
             }
 
             movieCard.innerHTML = `
