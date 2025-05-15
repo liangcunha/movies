@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("URL da capa não encontrada para:", movie.titulo);
             }
 
-            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Ver mais</a></p>` : '';
+            const linkHtml = movie.link ? `<p><strong>Ver On-Line:</strong> <a href="${movie.link}" target="_blank">Assistir</a></p>` : '';
 
             movieCard.innerHTML = `
                 ${posterHtml}
