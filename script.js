@@ -1,6 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pub?output=csv';
     const movieListContainer = document.getElementById('movie-list');
+    const sortBySelect = document.getElementById('sort-by');
+    const lastUpdatedElement = document.getElementById('last-updated') || document.getElementById('last-updated-footer');
+
+    // Data da última atualização (você precisará atualizar isso manualmente)
+    const lastUpdatedDate = '2025-05-15';
+    if (lastUpdatedElement) {
+        lastUpdatedElement.textContent = `Última atualização: ${lastUpdatedDate}`;
+    }
+
+    let allMovies = []; // Array para armazenar todos os filmes carregados
 
     fetch(csvUrl)
         .then(response => response.text())
@@ -12,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return values ? values.map(v => v.trim().replace(/^"/, '').replace(/"$/, '')) : [];
             });
 
-            const movies = moviesData.map(rowValues => {
+            allMovies = moviesData.map(rowValues => {
                 const movie = {};
                 headers.forEach((header, index) => {
                     movie[header] = rowValues[index] || '';
@@ -20,12 +30,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 return movie;
             });
 
-            displayMovies(movies);
+            displayMovies(allMovies);
         })
         .catch(error => {
             console.error('Erro ao buscar os dados:', error);
             movieListContainer.innerHTML = '<p>Erro ao carregar os filmes.</p>';
         });
+
+    sortBySelect.addEventListener('change', function() {
+        const sortBy = this.value;
+        let sortedMovies = [...allMovies]; // Cria uma cópia para não alterar o array original
+
+        switch (sortBy) {
+            case 'titulo':
+                sortedMovies.sort((a, b) => a.titulo.localeCompare(b.titulo));
+                break;
+            case 'ano':
+                sortedMovies.sort((a, b) => {
+                    const yearA = parseInt(a.ano);
+                    const yearB = parseInt(b.ano);
+                    return isNaN(yearA) ? 1 : isNaN(yearB) ? -1 : yearA - yearB;
+                });
+                break;
+            case 'nota':
+                sortedMovies.sort((a, b) => parseFloat(b.nota) - parseFloat(a.nota));
+                break;
+        }
+        displayMovies(sortedMovies);
+    });
 
     function displayMovies(movies) {
         movieListContainer.innerHTML = '';
@@ -43,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("URL da capa não encontrada para:", movie.titulo);
             }
 
-            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Assitir Agora</a></p>` : '';
+            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Ver mais</a></p>` : '';
             const anoHtml = movie.ano ? `<p><strong>Ano:</strong> ${movie.ano}</p>` : '';
 
             movieCard.innerHTML = `

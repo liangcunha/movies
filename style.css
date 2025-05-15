@@ -87,4 +87,17 @@ footer {
     z-index: 10; /* Garante que o número fique acima de outros elementos */
 }
 
-/* ... outros estilos ... */
+#sorting-options {
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+#sorting-options label {
+    margin-right: 5px;
+}
+
+#sorting-options select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
