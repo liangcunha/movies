@@ -43,11 +43,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("URL da capa não encontrada para:", movie.titulo);
             }
 
-            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Assista Agora</a></p>` : '';
+            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Ver mais</a></p>` : '';
+            const anoHtml = movie.ano ? `<p><strong>Ano:</strong> ${movie.ano}</p>` : '';
 
             movieCard.innerHTML = `
+                <span class="movie-number">${movie.numero}</span>
                 ${posterHtml}
                 <h3>${movie.titulo}</h3>
+                ${anoHtml}
                 ${movie.sinopse ? `<p><strong>Sinopse:</strong> ${movie.sinopse}</p>` : ''}
                 ${movie.nota ? `<p><strong>Minha Nota:</strong> ${movie.nota}</p>` : ''}
                 ${movie.plataforma ? `<p><strong>Plataforma:</strong> ${movie.plataforma}</p>` : ''}
