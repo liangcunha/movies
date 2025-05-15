@@ -34,10 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
             movieCard.classList.add('movie-card');
 
             let posterHtml = '';
-            let imageUrl = '';
             if (movie.capa_url) {
                 const imageUrlMatch = movie.capa_url.match(/=image\("([^"]+)"\)/i);
-                imageUrl = imageUrlMatch ? imageUrlMatch[1] : movie.capa_url;
+                const imageUrl = imageUrlMatch ? imageUrlMatch[1] : movie.capa_url;
                 console.log("URL da capa:", imageUrl);
                 posterHtml = `<div class="poster-container"><img src="${imageUrl}" alt="Pôster de ${movie.titulo}"></div>`;
             } else {
