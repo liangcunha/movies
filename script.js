@@ -1,4 +1,4 @@
-const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pub?output=tsv';
+const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pubhtmlhttps://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pub?output=tsv';
 
 async function carregarFilmes() {
   try {
@@ -8,7 +8,7 @@ async function carregarFilmes() {
     const lines = tsvText.trim().split('\n');
     const filmes = [];
 
-    // Pula o cabeçalho na linha 0
+    // Pula o cabeçalho na linha 0 teste
     for (let i = 1; i < lines.length; i++) {
       const cols = lines[i].split('\t');
       if (cols.length < 7) continue; // ignora linhas incompletas
