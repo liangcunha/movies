@@ -2,15 +2,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pub?output=csv';
     const movieListContainer = document.getElementById('movie-list');
     const sortBySelect = document.getElementById('sort-by');
-    const lastUpdatedElement = document.getElementById('last-updated') || document.getElementById('last-updated-footer');
+    const lastUpdatedElement = document.getElementById('last-updated');
 
-    // Data da última atualização (você precisará atualizar isso manualmente)
     const lastUpdatedDate = '2025-05-15';
     if (lastUpdatedElement) {
         lastUpdatedElement.textContent = `Última atualização: ${lastUpdatedDate}`;
     }
 
-    let allMovies = []; // Array para armazenar todos os filmes carregados
+    let allMovies = [];
 
     fetch(csvUrl)
         .then(response => response.text())
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     sortBySelect.addEventListener('change', function() {
         const sortBy = this.value;
-        let sortedMovies = [...allMovies]; // Cria uma cópia para não alterar o array original
+        let sortedMovies = [...allMovies];
 
         switch (sortBy) {
             case 'titulo':
@@ -69,13 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (movie.capa_url) {
                 const imageUrlMatch = movie.capa_url.match(/=image\("([^"]+)"\)/i);
                 const imageUrl = imageUrlMatch ? imageUrlMatch[1] : movie.capa_url;
-                console.log("URL da capa:", imageUrl);
                 posterHtml = `<div class="poster-container"><img src="${imageUrl}" alt="Pôster de ${movie.titulo}"></div>`;
-            } else {
-                console.log("URL da capa não encontrada para:", movie.titulo);
             }
 
-            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Ver mais</a></p>` : '';
+            const linkHtml = movie.link ? `<p><a href="${movie.link}" target="_blank">Assistir Agora</a></p>` : '';
             const anoHtml = movie.ano ? `<p><strong>Ano:</strong> ${movie.ano}</p>` : '';
 
             movieCard.innerHTML = `
