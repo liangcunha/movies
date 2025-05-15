@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sortBySelect = document.getElementById('sort-by');
     const lastUpdatedElement = document.getElementById('last-updated');
 
-    const lastUpdatedDate = '2025-05-15';
+    const lastUpdatedDate = '15/05/2025';
     if (lastUpdatedElement) {
         lastUpdatedElement.textContent = `Última atualização: ${lastUpdatedDate}`;
     }
