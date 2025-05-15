@@ -56,6 +56,22 @@
       color: #00ffe1;
       text-decoration: none;
     }
+      .sinopse {
+    max-height: 80px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .sinopse.expanded {
+    max-height: 500px;
+  }
+  .btn-toggle {
+    color: #00ffff;
+    cursor: pointer;
+    user-select: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 4px;
+  }
   </style>
 </head>
 <body>
@@ -86,7 +102,10 @@
             <p class="note">⭐ Nota: ${nota}</p>
             <p><strong>Plataforma:</strong> ${plataforma}</p>
             <p><strong>Idioma/Legenda:</strong> ${idioma}</p>
-            <p><strong>Sinopse:</strong> ${sinopse}</p>
+            <div class="sinopse-container">
+                <p class="sinopse" id="sinopse-N">${sinopse}</p>
+                <span class="btn-toggle" onclick="toggleSinopse('N')">Mostrar mais</span>
+            </div>
             <div class="link"><a href="${link}" target="_blank">Assistir</a></div>
           </div>
         `;
