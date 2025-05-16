@@ -361,14 +361,46 @@ footer {
     text-align: left;
 }
 
-/* Estilos para o título "Detalhes do Filme" (centralizar) */
-#movie-details-container header h1 {
-    text-align: center;
+/* Estilo para o cabeçalho com flexbox (lado direito) */
+#movie-details-container header {
+    display: flex;
+    justify-content: flex-end; /* Alinhar os itens à direita */
+    align-items: center;
+    background-color: #333; /* Cor do cabeçalho */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
     margin-bottom: 10px;
 }
 
-/* Remover a margem padrão do parágrafo que contém o link de voltar */
-#movie-details-container header p {
-    margin-bottom: 0;
-    text-align: center; /* Centralizar o link/botão */
+/* Estilo para o link da seta (lado direito) */
+#movie-details-container .back-arrow-link-header-right {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.3s ease; /* Transição para o hover */
+    font-size: 1em;
+}
+
+#movie-details-container .back-arrow-link-header-right:hover {
+    opacity: 0.8; /* Leve transparência no hover */
+}
+
+#movie-details-container .back-arrow {
+    font-size: 1.2em;
+    margin-left: 5px; /* Seta à esquerda do texto */
+}
+
+/* Esconder o link antigo, se ainda estiver lá */
+#movie-details-container header p a.back-arrow-link {
+    display: none;
+}
+
+/* Estilo para o título (alinhar à esquerda) */
+#movie-details-container header h1 {
+    color: #fff;
+    text-align: left;
+    margin: 0 20px 0 0; /* Margem à esquerda para separar da seta */
+    flex-grow: 1; /* O título ocupa o espaço restante */
 }
