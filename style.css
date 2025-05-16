@@ -31,7 +31,7 @@ header h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Permitir que os itens quebrem para a próxima linha */
 }
 
 #sorting-options,
@@ -39,6 +39,22 @@ header h1 {
 #search-options {
     display: flex;
     align-items: center;
+    margin-bottom: 10px; /* Adicionar um pouco de espaço entre os grupos de filtro em telas menores */
+    width: 100%; /* Ocupar a largura total em telas menores para empilhamento */
+    justify-content: center; /* Centralizar os itens dentro de cada grupo */
+}
+
+@media (min-width: 600px) {
+    #sorting-options,
+    #filter-options,
+    #search-options {
+        width: auto; /* Voltar ao comportamento automático em telas maiores */
+        margin-bottom: 0;
+    }
+
+    #controls {
+        justify-content: space-around; /* Distribuir os grupos de filtro em telas maiores */
+    }
 }
 
 #sorting-options label,
@@ -53,6 +69,8 @@ header h1 {
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    flex-grow: 1; /* Permitir que os campos de seleção/busca se expandam um pouco */
+    max-width: 200px; /* Definir uma largura máxima para evitar que fiquem muito largos */
 }
 
 #movie-list {
