@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchTitleInput = document.getElementById('search-title');
     const lastUpdatedElement = document.getElementById('last-updated');
 
-    const lastUpdatedDate = '2025-05-15';
+    const lastUpdatedDate = '2025-05-16'; // Atualizei a data para hoje
 
     function formatDate(dateString) {
         const parts = dateString.split('-');
@@ -125,8 +125,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${movie.plataforma ? `<p><strong>Plataforma:</strong> ${movie.plataforma}</p>` : ''}
                 ${movie.idioma_legenda ? `<p><strong>Idioma/Legenda:</strong> ${movie.idioma_legenda}</p>` : ''}
                 ${linkHtml}
+                <div id="disqus_thread_${movie.numero}"></div>
             `;
             movieListContainer.appendChild(movieCard);
+
+            // Código do Disqus para cada thread
+            const disqus_config = function () {
+                this.page.url = window.location.href + `?movie=${movie.numero}`; // URL única para cada filme
+                this.page.identifier = movie.numero; // Identificador único para cada filme
+            };
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = `https://liangmovies.disqus.com/embed.js`; // Use seu shortname: liangmovies
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
         });
     }
 });
