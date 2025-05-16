@@ -303,3 +303,21 @@ footer {
     margin-bottom: 15px;
     text-align: left;
 }
+/* Estilo para o botão de voltar na movie.html */
+#movie-details-container .back-to-home-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #555; /* Cor de fundo escura */
+    color: #fff;
+    text-decoration: none;
+    border: none; /* Remover borda padrão do botão */
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer; /* Mudar o cursor ao passar por cima */
+    transition: background-color 0.3s ease;
+    font-size: 1em;
+}
+
+#movie-details-container .back-to-home-button:hover {
+    background-color: #333; /* Cor de fundo mais escura ao passar o mouse */
+}
