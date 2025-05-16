@@ -205,13 +205,55 @@ footer {
 
 /* Estilos para a página movie.html */
 #movie-details-container {
+    position: relative;
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Centralizar o link de voltar */
+    text-align: left;
+}
+
+#movie-details-container header {
+    display: flex;
+    justify-content: space-between; /* Espaçar o título e o link de voltar */
+    align-items: center;
+    background-color: #333; /* Cor do cabeçalho */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 10px;
+}
+
+#movie-details-container header h1 {
+    color: #fff;
+    text-align: left;
+    margin: 0; /* Remover margens padrão do h1 */
+    flex-grow: 1; /* O título ocupa o espaço restante */
+}
+
+#movie-details-container .back-arrow-link-header-right {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Adicionando transição para o efeito */
+    font-size: 1em;
+    padding: 8px 12px; /* Adicionar um pouco de padding para o toque */
+    border-radius: 5px; /* Adicionar um pequeno arredondamento */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo levemente transparente */
+}
+
+#movie-details-container .back-arrow-link-header-right:hover {
+    opacity: 0.8;
+    transform: translateX(-3px); /* Leve deslocamento para a esquerda no hover */
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#movie-details-container .back-arrow {
+    font-size: 1.2em;
+    margin-right: 5px; /* Seta à esquerda do texto */
 }
 
 #movie-details-container a {
@@ -221,22 +263,6 @@ footer {
 
 #movie-details-container a:hover {
     text-decoration: underline;
-}
-
-#movie-details-container .back-to-home {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #555;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-    font-size: 1em;
-}
-
-#movie-details-container .back-to-home:hover {
-    background-color: #333;
 }
 
 #movie-details {
@@ -302,105 +328,4 @@ footer {
     margin-top: 0;
     margin-bottom: 15px;
     text-align: left;
-}
-/* Estilo para o botão de voltar na movie.html */
-#movie-details-container .back-to-home-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #555; /* Cor de fundo escura */
-    color: #fff;
-    text-decoration: none;
-    border: none; /* Remover borda padrão do botão */
-    border-radius: 5px;
-    margin-top: 20px;
-    cursor: pointer; /* Mudar o cursor ao passar por cima */
-    transition: background-color 0.3s ease;
-    font-size: 1em;
-}
-
-#movie-details-container .back-to-home-button:hover {
-    background-color: #333; /* Cor de fundo mais escura ao passar o mouse */
-}
-/* Estilo para a seta de voltar na movie.html - POSICIONAMENTO ABSOLUTO REFINADO */
-#movie-details-container .back-arrow-link {
-    position: absolute;
-    top: 10px; /* Ajuste fino da distância do topo */
-    right: 15px; /* Ajuste fino da distância da direita */
-    display: flex; /* Usar flex para alinhar a seta e o texto */
-    align-items: center;
-    color: #555;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    font-size: 1em;
-    z-index: 10;
-    background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente para melhor legibilidade */
-    padding: 5px 8px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Uma pequena sombra para destacar */
-}
-
-#movie-details-container .back-arrow-link:hover {
-    color: #333;
-    background-color: rgba(255, 255, 255, 1); /* Fundo branco opaco no hover */
-}
-
-#movie-details-container .back-arrow {
-    font-size: 1.2em; /* Ajustar o tamanho da seta */
-    margin-right: 5px;
-}
-
-/* Ajuste no contêiner (manter como estava) */
-#movie-details-container {
-    position: relative;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-/* Estilo para o cabeçalho com flexbox (lado direito) */
-#movie-details-container header {
-    display: flex;
-    justify-content: flex-end; /* Alinhar os itens à direita */
-    align-items: center;
-    background-color: #333; /* Cor do cabeçalho */
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px 8px 0 0;
-    margin-bottom: 10px;
-}
-
-/* Estilo para o link da seta (lado direito) */
-#movie-details-container .back-arrow-link-header-right {
-    display: flex;
-    align-items: center;
-    color: #fff;
-    text-decoration: none;
-    transition: opacity 0.3s ease; /* Transição para o hover */
-    font-size: 1em;
-}
-
-#movie-details-container .back-arrow-link-header-right:hover {
-    opacity: 0.8; /* Leve transparência no hover */
-}
-
-#movie-details-container .back-arrow {
-    font-size: 1.2em;
-    margin-left: 5px; /* Seta à esquerda do texto */
-}
-
-/* Esconder o link antigo, se ainda estiver lá */
-#movie-details-container header p a.back-arrow-link {
-    display: none;
-}
-
-/* Estilo para o título (alinhar à esquerda) */
-#movie-details-container header h1 {
-    color: #fff;
-    text-align: left;
-    margin: 0 20px 0 0; /* Margem à esquerda para separar da seta */
-    flex-grow: 1; /* O título ocupa o espaço restante */
 }
