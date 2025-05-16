@@ -31,7 +31,7 @@ header h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap; /* Permitir que os itens quebrem para a próxima linha */
+    flex-wrap: wrap; /* Permitir quebrar para a próxima linha em telas menores */
 }
 
 #sorting-options,
@@ -39,21 +39,21 @@ header h1 {
 #search-options {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Adicionar um pouco de espaço entre os grupos de filtro em telas menores */
-    width: 100%; /* Ocupar a largura total em telas menores para empilhamento */
-    justify-content: center; /* Centralizar os itens dentro de cada grupo */
+    margin-bottom: 10px; /* Espaço entre os filtros em telas menores */
+    width: 100%; /* Ocupar a largura total em telas menores */
+    justify-content: center; /* Centralizar os itens em telas menores */
 }
 
 @media (min-width: 600px) {
     #sorting-options,
     #filter-options,
     #search-options {
-        width: auto; /* Voltar ao comportamento automático em telas maiores */
+        width: auto;
         margin-bottom: 0;
     }
 
     #controls {
-        justify-content: space-around; /* Distribuir os grupos de filtro em telas maiores */
+        justify-content: space-around; /* Distribuir em telas maiores */
     }
 }
 
@@ -69,8 +69,8 @@ header h1 {
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    flex-grow: 1; /* Permitir que os campos de seleção/busca se expandam um pouco */
-    max-width: 200px; /* Definir uma largura máxima para evitar que fiquem muito largos */
+    flex-grow: 1;
+    max-width: 200px;
 }
 
 #movie-list {
@@ -82,7 +82,7 @@ header h1 {
 }
 
 .movie-card {
-    position: relative; /* Tornar o card um contêiner de posicionamento */
+    position: relative;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -100,7 +100,7 @@ header h1 {
     padding: 5px 8px;
     border-radius: 5px;
     font-size: 0.8em;
-    z-index: 10; /* Garante que o número fique acima de outros elementos */
+    z-index: 10;
 }
 
 .poster-container {
@@ -169,6 +169,7 @@ footer {
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centralizar o link de voltar */
 }
 
 #movie-details-container a {
@@ -178,6 +179,21 @@ footer {
 
 #movie-details-container a:hover {
     text-decoration: underline;
+}
+
+#movie-details-container .back-to-home {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#movie-details-container .back-to-home:hover {
+    background-color: #333;
 }
 
 #movie-details {
@@ -243,19 +259,4 @@ footer {
     margin-top: 0;
     margin-bottom: 15px;
     text-align: left;
-}
-/* Estilo melhorado para o link de voltar na movie.html */
-#movie-details-container .back-to-home {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #555; /* Cor de fundo escura */
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-#movie-details-container .back-to-home:hover {
-    background-color: #333; /* Cor de fundo mais escura ao passar o mouse */
 }

@@ -58,7 +58,7 @@
     <script>
         const movieId = new URLSearchParams(window.location.search).get('id');
         const movieDetailsContainer = document.getElementById('movie-details-container');
-        let allMovies = JSON.parse(localStorage.getItem('allMovies')) || []; // Assumindo que os dados estão no localStorage
+        let allMovies = JSON.parse(localStorage.getItem('allMovies')) || [];
 
         if (movieId && allMovies.length > 0) {
             const movie = allMovies.find(m => m.numero === movieId);
@@ -83,7 +83,6 @@
                     </div>
                 `;
 
-                // Carregar Disqus
                 var disqus_config = function () {
                     this.page.url = window.location.href;
                     this.page.identifier = movieId;
