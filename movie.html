@@ -1,0 +1,70 @@
+<!-- movie.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filme</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="movie-container">
+    <h2>Carregando filme...</h2>
+  </main>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    // Pega o número do filme da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = urlParams.get('movie');
+
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pub?output=csv';
+
+    fetch(csvUrl)
+      .then(response => response.text())
+      .then(data => {
+        const rows = data.split('\n');
+        const headers = rows[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+        const movies = rows.slice(1).map(row => {
+          const values = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
+          const movie = {};
+          headers.forEach((h, i) => {
+            movie[h] = values[i] ? values[i].trim().replace(/^"|"$/g, '') : '';
+          });
+          return movie;
+        });
+
+        const selected = movies.find(m => m.numero === movieId);
+        const container = document.getElementById('movie-container');
+
+        if (!selected) {
+          container.innerHTML = '<p>Filme não encontrado.</p>';
+          return;
+        }
+
+        container.innerHTML = `
+          <h2>${selected.titulo}</h2>
+          ${selected.capa_url ? `<img src="${selected.capa_url.replace(/^=image\("(.+?)"\)$/, '$1')}" alt="${selected.titulo}" />` : ''}
+          <p><strong>Ano:</strong> ${selected.ano}</p>
+          <p><strong>Nota:</strong> ${selected.nota}</p>
+          <p><strong>Sinopse:</strong> ${selected.sinopse}</p>
+          <p><strong>Plataforma:</strong> ${selected.plataforma}</p>
+        `;
+
+        // Agora inicializa o Disqus
+        const disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = movieId;
+        };
+
+        const d = document, s = d.createElement('script');
+        s.src = 'https://liangmovies.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      });
+  </script>
+
+  <script id="dsq-count-scr" src="//liangmovies.disqus.com/count.js" async></script>
+</body>
+</html>
