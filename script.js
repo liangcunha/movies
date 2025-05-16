@@ -1,98 +1,135 @@
-const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pub?output=csv';
+document.addEventListener('DOMContentLoaded', function() {
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pub?output=csv';
+    const movieListContainer = document.getElementById('movie-list');
+    const sortBySelect = document.getElementById('sort-by');
+    const filterPlatformSelect = document.getElementById('filter-platform');
+    const searchTitleInput = document.getElementById('search-title');
+    const lastUpdatedElement = document.getElementById('last-updated');
 
-const movieContainer = document.getElementById('movie-container');
-const searchInput = document.getElementById('search');
-const platformFilter = document.getElementById('platform-filter');
-const ratingFilter = document.getElementById('rating-filter');
-const languageFilter = document.getElementById('language-filter');
+    const lastUpdatedDate = '2025-05-16';
 
-let allMovies = [];
+    function formatDate(dateString) {
+        const parts = dateString.split('-');
+        const year = parts[0];
+        const month = parts[1];
+        const day = parts[2];
+        return `${day}/${month}/${year}`;
+    }
 
-function createMovieCard(movie) {
-  const card = document.createElement('div');
-  card.classList.add('movie-card', 'rounded-2xl', 'shadow-lg', 'p-2', 'bg-white', 'dark:bg-gray-800', 'transition-transform', 'hover:scale-105');
+    if (lastUpdatedElement) {
+        lastUpdatedElement.textContent = `Última atualização: ${formatDate(lastUpdatedDate)}`;
+    }
 
-  const imageUrl = movie.capa_url?.match(/^=image\("(.+?)"\)/)?.[1] || movie.capa_url || '';
+    let allMovies = [];
 
-  card.innerHTML = `
-    <img src="${imageUrl}" alt="${movie.titulo}" class="w-full h-60 object-cover rounded-xl mb-2">
-    <h3 class="text-xl font-semibold">${movie.titulo}</h3>
-    <p class="text-sm text-gray-500 dark:text-gray-400">${movie.ano}</p>
-    <p class="text-sm">${movie.plataforma}</p>
-    <p class="text-sm">Nota: ${movie.nota}</p>
-    <p class="text-sm">Idioma: ${movie.idioma || 'não informado'}</p>
-    <p><a href="movie.html?movie=${movie.numero}" target="_blank" class="text-blue-500 hover:underline">Ver Comentários</a></p>
-  `;
-  return card;
-}
+    fetch(csvUrl)
+        .then(response => response.text())
+        .then(data => {
+            const rows = data.split('\n');
+            const headers = rows[0].split(',').map(header => header.trim().replace(/^"/, '').replace(/"$/, ''));
+            const moviesData = rows.slice(1).map(row => {
+                const values = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+                return values ? values.map(v => v.trim().replace(/^"/, '').replace(/"$/, '')) : [];
+            });
 
-function displayMovies(movies) {
-  movieContainer.innerHTML = '';
-  if (movies.length === 0) {
-    movieContainer.innerHTML = '<p class="col-span-full text-center">Nenhum filme encontrado.</p>';
-    return;
-  }
-  movies.forEach(movie => {
-    const card = createMovieCard(movie);
-    movieContainer.appendChild(card);
-  });
-}
+            allMovies = moviesData.map(rowValues => {
+                const movie = {};
+                headers.forEach((header, index) => {
+                    movie[header] = rowValues[index] || '';
+                });
+                return movie;
+            });
 
-function filterMovies() {
-  const searchText = searchInput.value.toLowerCase();
-  const platform = platformFilter.value;
-  const rating = parseFloat(ratingFilter.value);
-  const language = languageFilter.value;
+            // Salvar os filmes no localStorage
+            localStorage.setItem('allMovies', JSON.stringify(allMovies));
 
-  const filtered = allMovies.filter(movie => {
-    const matchesSearch = movie.titulo.toLowerCase().includes(searchText);
-    const matchesPlatform = !platform || movie.plataforma === platform;
-    const matchesRating = !rating || parseFloat(movie.nota) >= rating;
-    const matchesLanguage = !language || (movie.idioma || '').toLowerCase() === language.toLowerCase();
-    return matchesSearch && matchesPlatform && matchesRating && matchesLanguage;
-  });
+            populatePlatformFilter(allMovies);
+            displayMovies(allMovies);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar os dados:', error);
+            movieListContainer.innerHTML = '<p>Erro ao carregar os filmes.</p>';
+        });
 
-  displayMovies(filtered);
-}
+    function populatePlatformFilter(movies) {
+        const platforms = [...new Set(movies.map(movie => movie.plataforma).filter(Boolean))];
+        platforms.forEach(platform => {
+            const option = document.createElement('option');
+            option.value = platform;
+            option.textContent = platform;
+            filterPlatformSelect.appendChild(option);
+        });
+    }
 
-function populateFilters(movies) {
-  const platforms = [...new Set(movies.map(m => m.plataforma).filter(Boolean))];
-  const languages = [...new Set(movies.map(m => m.idioma?.toLowerCase()).filter(Boolean))];
+    sortBySelect.addEventListener('change', applyFiltersAndSort);
+    filterPlatformSelect.addEventListener('change', applyFiltersAndSort);
+    searchTitleInput.addEventListener('input', applyFiltersAndSort);
 
-  platforms.sort().forEach(p => {
-    const opt = document.createElement('option');
-    opt.value = p;
-    opt.textContent = p;
-    platformFilter.appendChild(opt);
-  });
+    function applyFiltersAndSort() {
+        const sortBy = sortBySelect.value;
+        const selectedPlatform = filterPlatformSelect.value;
+        const searchTerm = searchTitleInput.value.toLowerCase();
 
-  languages.sort().forEach(l => {
-    const opt = document.createElement('option');
-    opt.value = l;
-    opt.textContent = l.charAt(0).toUpperCase() + l.slice(1);
-    languageFilter.appendChild(opt);
-  });
-}
+        let filteredMovies = [...allMovies];
 
-fetch(csvUrl)
-  .then(response => response.text())
-  .then(data => {
-    const rows = data.split('\n');
-    const headers = rows[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
-    allMovies = rows.slice(1).map(row => {
-      const values = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
-      const movie = {};
-      headers.forEach((h, i) => {
-        movie[h] = values[i] ? values[i].trim().replace(/^"|"$/g, '') : '';
-      });
-      return movie;
-    }).filter(m => m.titulo); // Remove linhas vazias
+        if (selectedPlatform) {
+            filteredMovies = filteredMovies.filter(movie => movie.plataforma === selectedPlatform);
+        }
 
-    populateFilters(allMovies);
-    displayMovies(allMovies);
-  });
+        if (searchTerm) {
+            filteredMovies = filteredMovies.filter(movie =>
+                movie.titulo.toLowerCase().includes(searchTerm)
+            );
+        }
 
-searchInput.addEventListener('input', filterMovies);
-platformFilter.addEventListener('change', filterMovies);
-ratingFilter.addEventListener('change', filterMovies);
-languageFilter.addEventListener('change', filterMovies);
+        let sortedMovies = [...filteredMovies];
+
+        switch (sortBy) {
+            case 'titulo':
+                sortedMovies.sort((a, b) => a.titulo.localeCompare(b.titulo));
+                break;
+            case 'ano':
+                sortedMovies.sort((a, b) => {
+                    const yearA = parseInt(a.ano);
+                    const yearB = parseInt(b.ano);
+                    return isNaN(yearA) ? 1 : isNaN(yearB) ? -1 : yearA - yearB;
+                });
+                break;
+            case 'nota':
+                sortedMovies.sort((a, b) => parseFloat(b.nota) - parseFloat(a.nota));
+                break;
+        }
+        displayMovies(sortedMovies);
+    }
+
+    function displayMovies(movies) {
+        movieListContainer.innerHTML = '';
+        movies.forEach(movie => {
+            const movieCard = document.createElement('div');
+            movieCard.classList.add('movie-card');
+
+            let posterHtml = '';
+            if (movie.capa_url) {
+                const imageUrlMatch = movie.capa_url.match(/=image\("([^"]+)"\)/i);
+                const imageUrl = imageUrlMatch ? imageUrlMatch[1] : movie.capa_url;
+                posterHtml = `<div class="poster-container"><img src="${imageUrl}" alt="Pôster de ${movie.titulo}"></div>`;
+            }
+
+            const linkHtml = `<p><a href="movie.html?id=${movie.numero}">Ver Detalhes e Comentários</a></p>`;
+            const anoHtml = movie.ano ? `<p><strong>Ano:</strong> ${movie.ano}</p>` : '';
+
+            movieCard.innerHTML = `
+                <span class="movie-number">${movie.numero}</span>
+                ${posterHtml}
+                <h3>${movie.titulo}</h3>
+                ${anoHtml}
+                ${movie.sinopse ? `<p><strong>Sinopse:</strong> ${movie.sinopse}</p>` : ''}
+                ${movie.nota ? `<p><strong>Minha Nota:</strong> ${movie.nota}</p>` : ''}
+                ${movie.plataforma ? `<p><strong>Plataforma:</strong> ${movie.plataforma}</p>` : ''}
+                ${movie.idioma_legenda ? `<p><strong>Idioma/Legenda:</strong> ${movie.idioma_legenda}</p>` : ''}
+                ${linkHtml}
+            `;
+            movieListContainer.appendChild(movieCard);
+        });
+    }
+});

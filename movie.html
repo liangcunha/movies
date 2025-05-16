@@ -1,70 +1,105 @@
-<!-- movie.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Filme</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <main id="movie-container">
-    <h2>Carregando filme...</h2>
-  </main>
-
-  <div id="disqus_thread"></div>
-
-  <script>
-    // Pega o número do filme da URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const movieId = urlParams.get('movie');
-
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-pua825hCuHGSxgEMd9bzvSylThv1xzF-ULY6q3z8yYUk9SzFE8ZA27a3-qR3NtTtFASvc7ypzehi/pub?output=csv';
-
-    fetch(csvUrl)
-      .then(response => response.text())
-      .then(data => {
-        const rows = data.split('\n');
-        const headers = rows[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
-        const movies = rows.slice(1).map(row => {
-          const values = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
-          const movie = {};
-          headers.forEach((h, i) => {
-            movie[h] = values[i] ? values[i].trim().replace(/^"|"$/g, '') : '';
-          });
-          return movie;
-        });
-
-        const selected = movies.find(m => m.numero === movieId);
-        const container = document.getElementById('movie-container');
-
-        if (!selected) {
-          container.innerHTML = '<p>Filme não encontrado.</p>';
-          return;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Filme</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #movie-details {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
-        container.innerHTML = `
-          <h2>${selected.titulo}</h2>
-          ${selected.capa_url ? `<img src="${selected.capa_url.replace(/^=image\("(.+?)"\)$/, '$1')}" alt="${selected.titulo}" />` : ''}
-          <p><strong>Ano:</strong> ${selected.ano}</p>
-          <p><strong>Nota:</strong> ${selected.nota}</p>
-          <p><strong>Sinopse:</strong> ${selected.sinopse}</p>
-          <p><strong>Plataforma:</strong> ${selected.plataforma}</p>
-        `;
+        #movie-details img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
 
-        // Agora inicializa o Disqus
-        const disqus_config = function () {
-          this.page.url = window.location.href;
-          this.page.identifier = movieId;
-        };
+        #movie-details h2 {
+            margin-top: 0;
+            color: #333;
+            margin-bottom: 10px;
+        }
 
-        const d = document, s = d.createElement('script');
-        s.src = 'https://liangmovies.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-      });
-  </script>
+        #movie-details p {
+            color: #555;
+            margin-bottom: 8px;
+        }
 
-  <script id="dsq-count-scr" src="//liangmovies.disqus.com/count.js" async></script>
+        #disqus_thread {
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Detalhes do Filme</h1>
+        <p><a href="index.html">Voltar para a página principal</a></p>
+    </header>
+
+    <main id="movie-details-container">
+        <p>Carregando detalhes do filme...</p>
+    </main>
+
+    <div id="disqus_thread"></div>
+
+    <script>
+        const movieId = new URLSearchParams(window.location.search).get('id');
+        const movieDetailsContainer = document.getElementById('movie-details-container');
+        let allMovies = JSON.parse(localStorage.getItem('allMovies')) || []; // Assumindo que os dados estão no localStorage
+
+        if (movieId && allMovies.length > 0) {
+            const movie = allMovies.find(m => m.numero === movieId);
+            if (movie) {
+                let posterHtml = '';
+                if (movie.capa_url) {
+                    const imageUrlMatch = movie.capa_url.match(/=image\("([^"]+)"\)/i);
+                    const imageUrl = imageUrlMatch ? imageUrlMatch[1] : movie.capa_url;
+                    posterHtml = `<img src="${imageUrl}" alt="Pôster de ${movie.titulo}">`;
+                }
+
+                movieDetailsContainer.innerHTML = `
+                    <div id="movie-details">
+                        <h2>${movie.titulo}</h2>
+                        ${posterHtml}
+                        <p><strong>Ano:</strong> ${movie.ano}</p>
+                        <p><strong>Sinopse:</strong> ${movie.sinopse}</p>
+                        <p><strong>Minha Nota:</strong> ${movie.nota}</p>
+                        <p><strong>Plataforma:</strong> ${movie.plataforma}</p>
+                        <p><strong>Idioma/Legenda:</strong> ${movie.idioma_legenda}</p>
+                        ${movie.link ? `<p><a href="${movie.link}" target="_blank">Assistir Agora</a></p>` : ''}
+                    </div>
+                `;
+
+                // Carregar Disqus
+                var disqus_config = function () {
+                    this.page.url = window.location.href;
+                    this.page.identifier = movieId;
+                };
+                (function() {
+                    var d = document, s = d.createElement('script');
+                    s.src = `https://liangmovies.disqus.com/embed.js`;
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            } else {
+                movieDetailsContainer.innerHTML = '<p>Filme não encontrado.</p>';
+            }
+        } else {
+            movieDetailsContainer.innerHTML = '<p>ID do filme inválido.</p>';
+        }
+    </script>
 </body>
 </html>
