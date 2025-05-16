@@ -260,3 +260,19 @@ footer {
     margin-bottom: 15px;
     text-align: left;
 }
+
+#movie-details-container header p a.back-to-home {
+    /* As mesmas propriedades de antes */
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#movie-details-container header p a.back-to-home:hover {
+    background-color: #333;
+}
