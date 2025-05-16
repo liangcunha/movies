@@ -321,56 +321,54 @@ footer {
 #movie-details-container .back-to-home-button:hover {
     background-color: #333; /* Cor de fundo mais escura ao passar o mouse */
 }
-/* Estilo para a seta de voltar na movie.html */
+/* Estilo para a seta de voltar na movie.html - POSICIONAMENTO ABSOLUTO REFINADO */
 #movie-details-container .back-arrow-link {
-    display: inline-flex; /* Para alinhar a seta e o texto verticalmente */
-    align-items: center;
-    color: #555;
-    text-decoration: none;
-    margin-top: 20px;
-    transition: color 0.3s ease;
-    font-size: 1em;
-}
-
-#movie-details-container .back-arrow-link:hover {
-    color: #333;
-}
-
-#movie-details-container .back-arrow {
-    font-size: 1.5em; /* Tornar a seta maior */
-    margin-right: 5px;
-}
-/* Estilo para a seta de voltar na movie.html - POSICIONAMENTO ABSOLUTO */
-#movie-details-container .back-arrow-link {
-    position: absolute; /* Posicionamento absoluto */
-    top: 10px; /* Ajuste a distância do topo conforme necessário */
-    right: 10px; /* Ajuste a distância da direita conforme necessário */
-    display: inline-flex;
+    position: absolute;
+    top: 10px; /* Ajuste fino da distância do topo */
+    right: 15px; /* Ajuste fino da distância da direita */
+    display: flex; /* Usar flex para alinhar a seta e o texto */
     align-items: center;
     color: #555;
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 1em;
-    z-index: 10; /* Garante que a seta fique acima de outros elementos */
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente para melhor legibilidade */
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Uma pequena sombra para destacar */
 }
 
 #movie-details-container .back-arrow-link:hover {
     color: #333;
+    background-color: rgba(255, 255, 255, 1); /* Fundo branco opaco no hover */
 }
 
 #movie-details-container .back-arrow {
-    font-size: 1.5em;
+    font-size: 1.2em; /* Ajustar o tamanho da seta */
     margin-right: 5px;
 }
 
-/* Ajuste no contêiner para permitir o posicionamento absoluto e centralizar o texto */
+/* Ajuste no contêiner (manter como estava) */
 #movie-details-container {
-    position: relative; /* Tornar o contêiner um contexto de posicionamento */
+    position: relative;
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: left; /* Alinhar o conteúdo à esquerda por padrão */
+    text-align: left;
+}
+
+/* Estilos para o título "Detalhes do Filme" (centralizar) */
+#movie-details-container header h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Remover a margem padrão do parágrafo que contém o link de voltar */
+#movie-details-container header p {
+    margin-bottom: 0;
+    text-align: center; /* Centralizar o link/botão */
 }
