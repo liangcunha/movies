@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Dicas de Filmes</title>
+    <title>LiangFlix</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>LiangFlix</h1>
-        <p>Procurando o que maratonar? Este é o lugar ideal! Explore informações, deixe suas avaliações e participe da discussão comentando sobre seus filmes e séries favoritos.</p>
+        <p>O lugar ideal para descobrir onde e o que maratonar! Encontre informações, avaliações e a oportunidade de comentar sobre seus filmes e séries TOP.</p>
         <div id="controls">
             <div id="sorting-options">
                 <label for="sort-by">Ordenar por:</label>
@@ -18,19 +18,22 @@
                     <option value="ano">Ano</option>
                     <option value="nota">Nota</option>
                 </select>
+                <span class="control-description">(Selecione a forma de ordenar os filmes)</span>
             </div>
             <div id="filter-options">
                 <label for="filter-platform">Filtrar por Plataforma:</label>
                 <select id="filter-platform">
                     <option value="">Todas</option>
                 </select>
+                <span class="control-description">(Selecione uma plataforma para filtrar os filmes)</span>
             </div>
             <div id="search-options">
                 <label for="search-title">Buscar por Nome:</label>
                 <input type="text" id="search-title" placeholder="Digite o nome do filme">
+                <span class="control-description">(Digite o nome do filme que você procura)</span>
             </div>
         </div>
-        <p id="last-updated">Última atualização: 2025-05-16</p>
+        <p id="last-updated">Última atualização: 16/05/2025</p>
     </header>
 
     <main id="movie-list">

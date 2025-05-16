@@ -20,6 +20,20 @@ header h1 {
     margin-bottom: 0.5em;
 }
 
+header p {
+    text-align: center; /* Alinhamento central padrão */
+    color: #eee; /* Cor da descrição */
+    margin-bottom: 1em;
+}
+
+@media (max-width: 600px) {
+    header p {
+        text-align: left; /* Alinhar à esquerda em telas menores */
+        padding-left: 20px; /* Adicionar um pouco de margem esquerda para respiro */
+        padding-right: 20px;
+    }
+}
+
 #controls {
     display: flex;
     flex-direction: column; /* Empilhar os filtros em telas menores */
@@ -37,46 +51,18 @@ header h1 {
 #filter-options,
 #search-options {
     display: flex;
-    align-items: center;
+    flex-direction: column; /* Empilhar os elementos dentro do filtro em telas menores */
+    align-items: flex-start; /* Alinhar à esquerda os elementos dentro do filtro em telas menores */
     width: 100%;
+    margin-bottom: 15px; /* Mais espaço entre os grupos de filtro em telas menores */
 }
 
 #sorting-options label,
 #filter-options label,
 #search-options label {
     margin-right: 5px;
-    flex-shrink: 0; /* Evitar que os rótulos encolham demais */
-}
-
-#sort-by,
-#filter-platform,
-#search-title {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    flex-grow: 1; /* Permitir que os campos de seleção/busca se expandam */
-}
-
-@media (min-width: 600px) {
-    #controls {
-        flex-direction: row; /* Voltar ao layout de linha em telas maiores */
-        flex-wrap: wrap; /* Permitir quebra em telas maiores se necessário */
-        justify-content: space-around;
-        align-items: center;
-    }
-
-    #sorting-options,
-    #filter-options,
-    #search-options {
-        width: auto;
-        margin-bottom: 0;
-    }
-}
-
-#sorting-options label,
-#filter-options label,
-#search-options label {
-    margin-right: 5px;
+    flex-shrink: 0;
+    margin-bottom: 5px; /* Espaço entre label e select/input em telas menores */
 }
 
 #sort-by,
@@ -86,7 +72,47 @@ header h1 {
     border: 1px solid #ddd;
     border-radius: 4px;
     flex-grow: 1;
-    max-width: 200px;
+    width: 100%; /* Ocupar a largura total do contêiner do filtro */
+}
+
+.control-description {
+    font-size: 0.8em;
+    color: #777;
+    margin-left: 0; /* Remover margem esquerda padrão */
+    margin-top: 5px;
+    text-align: left; /* Alinhar à esquerda as descrições em telas menores */
+}
+
+@media (min-width: 600px) {
+    #controls {
+        flex-direction: row; /* Voltar ao layout de linha em telas maiores */
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #sorting-options,
+    #filter-options,
+    #search-options {
+        flex-direction: row; /* Voltar ao layout de linha em telas maiores */
+        align-items: center;
+        width: auto;
+        margin-bottom: 0;
+    }
+
+    #sorting-options label,
+    #filter-options label,
+    #search-options label {
+        margin-right: 5px;
+        margin-bottom: 0;
+    }
+
+    .control-description {
+        display: inline; /* Voltar ao display inline em telas maiores */
+        margin-left: 5px;
+        margin-top: 0;
+        text-align: left;
+    }
 }
 
 #movie-list {
@@ -204,8 +230,9 @@ footer {
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 10px;
     transition: background-color 0.3s ease;
+    font-size: 1em;
 }
 
 #movie-details-container .back-to-home:hover {
@@ -275,20 +302,4 @@ footer {
     margin-top: 0;
     margin-bottom: 15px;
     text-align: left;
-}
-
-#movie-details-container header p a.back-to-home {
-    /* As mesmas propriedades de antes */
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #555;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-#movie-details-container header p a.back-to-home:hover {
-    background-color: #333;
 }
