@@ -224,3 +224,18 @@ footer {
     margin-bottom: 15px;
     text-align: left;
 }
+/* Estilo melhorado para o link de voltar na movie.html */
+#movie-details-container .back-to-home {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #555; /* Cor de fundo escura */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#movie-details-container .back-to-home:hover {
+    background-color: #333; /* Cor de fundo mais escura ao passar o mouse */
+}
