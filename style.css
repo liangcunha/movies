@@ -64,6 +64,7 @@ header h1 {
 }
 
 .movie-card {
+    position: relative; /* Tornar o card um contêiner de posicionamento */
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -81,6 +82,7 @@ header h1 {
     padding: 5px 8px;
     border-radius: 5px;
     font-size: 0.8em;
+    z-index: 10; /* Garante que o número fique acima de outros elementos */
 }
 
 .poster-container {
@@ -223,19 +225,4 @@ footer {
     margin-top: 0;
     margin-bottom: 15px;
     text-align: left;
-}
-/* Estilo melhorado para o link de voltar na movie.html */
-#movie-details-container .back-to-home {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #555; /* Cor de fundo escura */
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-#movie-details-container .back-to-home:hover {
-    background-color: #333; /* Cor de fundo mais escura ao passar o mouse */
 }
