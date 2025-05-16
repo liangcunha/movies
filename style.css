@@ -340,3 +340,37 @@ footer {
     font-size: 1.5em; /* Tornar a seta maior */
     margin-right: 5px;
 }
+/* Estilo para a seta de voltar na movie.html - POSICIONAMENTO ABSOLUTO */
+#movie-details-container .back-arrow-link {
+    position: absolute; /* Posicionamento absoluto */
+    top: 10px; /* Ajuste a distância do topo conforme necessário */
+    right: 10px; /* Ajuste a distância da direita conforme necessário */
+    display: inline-flex;
+    align-items: center;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1em;
+    z-index: 10; /* Garante que a seta fique acima de outros elementos */
+}
+
+#movie-details-container .back-arrow-link:hover {
+    color: #333;
+}
+
+#movie-details-container .back-arrow {
+    font-size: 1.5em;
+    margin-right: 5px;
+}
+
+/* Ajuste no contêiner para permitir o posicionamento absoluto e centralizar o texto */
+#movie-details-container {
+    position: relative; /* Tornar o contêiner um contexto de posicionamento */
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Alinhar o conteúdo à esquerda por padrão */
+}
